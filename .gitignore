@@ -1,0 +1,16 @@
+.classpath
+.project
+.settings/
+target/
+src/main/webapp/WEB-INF/classes/
+src/main/webapp/WEB-INF/lib/
+bin/
+.idea
+customer.iml
+*.iml
+catalina.home_IS_UNDEFINED
+/idCenter/**/bin/
+atlassian-ide-plugin.xml
+classes
+*/target/
+*iml
