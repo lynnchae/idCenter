@@ -1,0 +1,2 @@
+# idCenter
+generate id
