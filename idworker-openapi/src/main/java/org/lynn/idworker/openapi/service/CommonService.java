@@ -1,8 +1,8 @@
-package com.mobanker.idworker.openapi.service;
+package org.lynn.idworker.openapi.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mobanker.idworker.openapi.hook.ShutdownHookConfig;
-import com.mobanker.zkc.cache.CacheManager;
+import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
+import org.lynn.zkc.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.*;
 
+import static com.alibaba.dubbo.common.utils.StringUtils.isBlank;
 import static com.alibaba.fastjson.JSON.toJSONString;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * Copyright @ 2013QIANLONG.
  * All right reserved.
- * Class Name : com.mobanker.idworker.utils
+ * Class Name : org.lynn.idworker.utils
  * Description :
  * Author : cailinfeng
  * Date : 2017/2/22

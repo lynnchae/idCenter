@@ -1,8 +1,8 @@
-package com.mobanker.idworker.openapi.service;
+package org.lynn.idworker.openapi.service;
 
-import com.mobanker.common.utils.DateUtils;
-import com.mobanker.idworker.contract.IdGenContract;
-import com.mobanker.idworker.openapi.hook.ShutdownHookConfig;
+import org.lynn.common.utils.DateUtils;
+import org.lynn.idworker.contract.IdGenContract;
+import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 /**
  * Copyright @ 2013QIANLONG.
  * All right reserved.
- * Class Name : com.mobanker.idworker.business
+ * Class Name : org.lynn.idworker.business
  * Description :
  * Author : cailinfeng
  * Date : 2016/8/5

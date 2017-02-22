@@ -1,7 +1,7 @@
-package com.mobanker.idworker.openapi.service;
+package org.lynn.idworker.openapi.service;
 
-import com.mobanker.idworker.openapi.hook.ShutdownHookConfig;
-import com.mobanker.zkc.cache.CacheManager;
+import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
+import org.lynn.zkc.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;

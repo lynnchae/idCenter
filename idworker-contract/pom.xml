@@ -7,7 +7,7 @@
     <name>idCenter_dubbo</name>
     <url>http://maven.apache.org</url>
     <artifactId>idworker-contract</artifactId>
-    <groupId>com.mobanker.idCenter</groupId>
+    <groupId>org.lynn.idCenter</groupId>
     <version>1.0.0-SNAPSHOT</version>
 
 

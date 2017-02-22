@@ -20,31 +20,31 @@
 
 
     <!-- 启用新的PropertyPlaceholderConfigurer,zk连接从这里开始 -->
-    <bean class="com.mobanker.zkc.property.PropertyPlaceholderConfigurer">
+    <bean class="org.lynn.zkc.property.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="locations">
             <list>
                 <!--系统相关配置、数据库配置 -->
-                <value>classpath:mobanker.properties</value>
+                <value>classpath:lynn.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8" />
     </bean>
 
-    <bean id="commonService" class="com.mobanker.idworker.openapi.service.CommonService" />
+    <bean id="commonService" class="org.lynn.idworker.openapi.service.CommonService" />
 
 
     <!-- 引入DB数据源 -->
     <!--<import resource="classpath:/spring/dataSource.xml"/>-->
     <!-- 引入基础框架的配置 -->
 
-    <bean id="customUUIDService" class="com.mobanker.idworker.openapi.service.CustomUUIDService" >
+    <bean id="customUUIDService" class="org.lynn.idworker.openapi.service.CustomUUIDService" >
         <constructor-arg index="0" ref="commonService" />
     </bean>
 
-    <bean id = "idGenService" class="com.mobanker.idworker.openapi.service.IdGenService">
+    <bean id = "idGenService" class="org.lynn.idworker.openapi.service.IdGenService">
         <constructor-arg name="customUUIDService" ref="customUUIDService"/>
     </bean>
 
@@ -63,5 +63,5 @@
     <!--<dubbo:protocol name="rest" port="8044" server="tomcat" contextpath="config" /> -->
     <dubbo:monitor protocol="registry" />
 
-    <dubbo:service id="idGenContract" interface="com.mobanker.idworker.contract.IdGenContract" ref="idGenService" timeout="1500"/>
+    <dubbo:service id="idGenContract" interface="org.lynn.idworker.contract.IdGenContract" ref="idGenService" timeout="1500"/>
 </beans>

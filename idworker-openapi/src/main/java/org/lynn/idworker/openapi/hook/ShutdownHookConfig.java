@@ -1,4 +1,4 @@
-package com.mobanker.idworker.openapi.hook;
+package org.lynn.idworker.openapi.hook;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 /**
  * Copyright @ 2013QIANLONG.
  * All right reserved.
- * Class Name : com.mobanker.idworker
+ * Class Name : org.lynn.idworker
  * Description :
  * Author : cailinfeng
  * Date : 2017/2/22

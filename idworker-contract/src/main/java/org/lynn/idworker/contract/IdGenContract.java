@@ -1,9 +1,9 @@
-package com.mobanker.idworker.contract;
+package org.lynn.idworker.contract;
 
 /**
  * Copyright @ 2013QIANLONG.
  * All right reserved.
- * Class Name : com.mobanker.idworker.contract
+ * Class Name : org.lynn.idworker.contract
  * Description :
  * Author : cailinfeng
  * Date : 2016/8/5
