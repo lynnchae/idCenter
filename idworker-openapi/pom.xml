@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>idworker-openapi</artifactId>
     <packaging>jar</packaging>
-    <name>idCenter</name>
+    <name>idworker-openapi</name>
     <url>http://maven.apache.org</url>
     <build>
         <finalName>idCenter</finalName>
