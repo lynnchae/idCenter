@@ -4,9 +4,10 @@ import org.lynn.idworker.contract.IdGenContract;
 import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +22,9 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * Author : cailinfeng
  * Date : 2016/8/5
  */
-@Service
+@Path("/id")
+@Consumes({MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 public class IdGenService implements IdGenContract {
 
     private static final Logger log = LoggerFactory.getLogger(IdGenService.class);
@@ -32,7 +35,7 @@ public class IdGenService implements IdGenContract {
     private static int QUEUE_THREASHOLD = 2000;
 
     //队列最大值
-    private static int QUEUE_MAX = 22000 ;
+    private static int QUEUE_MAX = 22000;
 
     private static long lastTimestamp = -1L;
 
@@ -44,27 +47,31 @@ public class IdGenService implements IdGenContract {
 
 
     public IdGenService(CustomUUIDService customUUIDService) {
-        this.QUEUE_MAX = 50000;
-        this.QUEUE_THREASHOLD = 500;
+        this.QUEUE_MAX = 10;
+        this.QUEUE_THREASHOLD = 5;
         this.customUUIDService = customUUIDService;
-        for(int i = 0 ; i < QUEUE_MAX ; i++) {
+        for (int i = 0; i < QUEUE_MAX; i++) {
             concurrentLinkedDeque.add(customUUIDService.generate());
         }
         new IdProducer().start();
     }
 
     @Override
+    @Path("/genid")
+    @GET
     public String genId() {
         return String.valueOf(concurrentLinkedDeque.poll());
     }
 
     @Override
-    public String genIdUserDefined(Integer businessId) {
+    @Path("/getid/{businessId}")
+    @GET
+    public String genIdUserDefined(@PathParam("businessId") Integer businessId) {
         return produceId(businessId);
     }
 
-    private synchronized String produceId(Integer businessId){
-        if(businessId > 99){
+    private synchronized String produceId(Integer businessId) {
+        if (businessId > 99) {
             throw new RuntimeException("idGen only suppurt 99 products, please input [business] less than 100!");
         }
         StringBuffer returnId = new StringBuffer("");
@@ -73,12 +80,12 @@ public class IdGenService implements IdGenContract {
         //日期前缀
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
         String datePrefix = sdf.format(new Date());
-        if(businessId < 10){
-            bizId = "0"+businessId;
+        if (businessId < 10) {
+            bizId = "0" + businessId;
         }
         returnId.append(datePrefix).append(bizId);
 
-        returnId.append(commonService.generateCurrentid(ShutdownHookConfig.MACHINEID,99));
+        returnId.append(commonService.generateCurrentid(ShutdownHookConfig.MACHINEID, 99));
         //
         String currentMillis = String.valueOf(getNextTimeStamp()).substring(3);
         returnId.append(currentMillis);
@@ -98,7 +105,7 @@ public class IdGenService implements IdGenContract {
         return System.currentTimeMillis();
     }
 
-    public long getNextTimeStamp(){
+    public long getNextTimeStamp() {
         long timestamp = timeGen();
 
         if (timestamp < lastTimestamp) {
@@ -110,27 +117,27 @@ public class IdGenService implements IdGenContract {
             }
         }
 
-        if (timestamp == lastTimestamp){
+        if (timestamp == lastTimestamp) {
             timestamp = tailNextMillis(lastTimestamp);
         }
         lastTimestamp = timestamp;
         return timestamp;
     }
 
-    class IdProducer extends Thread{
+    class IdProducer extends Thread {
 
         @Override
         public void run() {
-            log.info(String.format("========>  id生成器启动，初始化大小为：[%d]",QUEUE_MAX));
+            log.info(String.format("========>  idworker start with [%d] queue", QUEUE_MAX));
             List<Long> tempList = new ArrayList<>();
-            while(true){
-                while(concurrentLinkedDeque.size() < QUEUE_THREASHOLD){
+            while (true) {
+                while (concurrentLinkedDeque.size() < QUEUE_THREASHOLD) {
                     tempList.clear();
-                    for(int i = 0 ; i < (QUEUE_MAX - QUEUE_THREASHOLD) ; i++){
+                    for (int i = 0; i < (QUEUE_MAX - QUEUE_THREASHOLD); i++) {
                         tempList.add(customUUIDService.generate());
                     }
                     concurrentLinkedDeque.addAll(tempList);
-                    log.info(String.format("向队列取中插入[%d]元素，队列大小为:[%d]",(QUEUE_MAX - QUEUE_THREASHOLD),concurrentLinkedDeque.size()));
+                    log.info(String.format("insert into queue [%d] ids, now the queueSize is :[%d]", (QUEUE_MAX - QUEUE_THREASHOLD), concurrentLinkedDeque.size()));
                 }
             }
         }

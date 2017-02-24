@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 
 /**
  * 自定义 ID 生成器 ID 生成规则: ID长达 64 bits
- *
+ * <p>
  * | 41 bits: Timestamp (毫秒) | 3 bits: 区域（机房） | 10 bits: 机器编号 | 10 bits: 序列号 |
  */
 @Component
@@ -60,7 +60,7 @@ public class CustomUUIDService {
     }
 
     public CustomUUIDService(CommonService commonService) {
-        long workerId = commonService.generateCurrentid(ShutdownHookConfig.WORKID,1022);
+        long workerId = commonService.generateCurrentid(ShutdownHookConfig.WORKID, 1022);
         // 如果超出范围就抛出异常
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException("worker Id can't be greater than %d or less than 0");
