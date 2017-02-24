@@ -1,7 +1,6 @@
 package org.lynn.idworker.openapi.service;
 
 import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
-import org.lynn.zkc.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -68,8 +67,6 @@ public class CustomUUIDService {
         }
         this.workerId = workerId;
         this.regionId = 0;
-        System.out.println("===========================>"+ CacheManager.getActiveMapValue(ShutdownHookConfig.MACHINEID));
-        System.out.println("===========================>"+ CacheManager.getActiveMapValue(ShutdownHookConfig.WORKID));
     }
 
     public long generate() {

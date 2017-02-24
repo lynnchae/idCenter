@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Copyright @ 2013QIANLONG.
@@ -23,6 +25,9 @@ public class ShutdownHookConfig {
     public static final String WORKID = "id.workerid";
 
     public static String ip = "";
+
+    public static Map workidmap = new HashMap<>();
+    public static Map machineidmap = new HashMap<>();
 
     static {
         try {

@@ -1,6 +1,5 @@
 package org.lynn.idworker.openapi.service;
 
-import org.lynn.common.utils.DateUtils;
 import org.lynn.idworker.contract.IdGenContract;
 import org.lynn.idworker.openapi.hook.ShutdownHookConfig;
 import org.slf4j.Logger;
@@ -8,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +71,8 @@ public class IdGenService implements IdGenContract {
         //产品前缀
         String bizId = String.valueOf(businessId);
         //日期前缀
-        String datePrefix = DateUtils.convert(new Date(),"yyyyMMddHH");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHH");
+        String datePrefix = sdf.format(new Date());
         if(businessId < 10){
             bizId = "0"+businessId;
         }

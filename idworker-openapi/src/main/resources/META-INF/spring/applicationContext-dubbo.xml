@@ -20,14 +20,14 @@
 
 
     <!-- 启用新的PropertyPlaceholderConfigurer,zk连接从这里开始 -->
-    <bean class="org.lynn.zkc.property.PropertyPlaceholderConfigurer">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="locations">
             <list>
                 <!--系统相关配置、数据库配置 -->
-                <value>classpath:lynn.properties</value>
+                <value>classpath:conf.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="utf-8" />
@@ -57,7 +57,7 @@
     <!--<dubbo:registry protocol="zookeeper" address="${dubbo.zk.url}" timeout="${dubbo.zk.timeout}" />-->
 
     <!-- 用dubbo协议在20888端口暴露服务,默认端口20880,port=-1, 当默认端口被占用，在20880端口自增1 -->
-    <dubbo:protocol name="dubbo" port="${dubbo.port}" />
+    <dubbo:protocol name="dubbo" port="-1" />
 
     <!-- http协议暴露端口 这种服务方式，必须要有一个接口被annotation @Path -->
     <!--<dubbo:protocol name="rest" port="8044" server="tomcat" contextpath="config" /> -->
