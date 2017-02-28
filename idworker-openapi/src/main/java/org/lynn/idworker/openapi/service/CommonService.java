@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 import static com.alibaba.dubbo.common.utils.StringUtils.isBlank;
+import static com.alibaba.fastjson.JSON.toJSONString;
 
 /**
  * Copyright @ 2013QIANLONG.
@@ -54,8 +55,21 @@ public class CommonService {
         idMap.put(ShutdownHookConfig.ip, currentWorkid);
         if (workOrmachine.equals(ShutdownHookConfig.WORKID)) {
             ShutdownHookConfig.workidmap = idMap;
+            workerids = toJSONString(idMap);
         } else {
             ShutdownHookConfig.machineidmap = idMap;
+            machineids = toJSONString(idMap);
+        }
+        if (workOrmachine.equals(ShutdownHookConfig.WORKID)) {
+            logger.info("|-----------------------------------|");
+            logger.info("|>>>> current workidMap is {} <<<<|" , workerids);
+            logger.info("|>>>> current workId is {} <<<<|" , currentWorkid);
+            logger.info("|-----------------------------------|");
+        } else {
+            logger.info("|-----------------------------------|");
+            logger.info("|>>>> current machineidMap is {} <<<<|" , machineids);
+            logger.info("|>>>> current machineId is {} <<<<|" , currentWorkid);
+            logger.info("|-----------------------------------|");
         }
         return Long.valueOf(currentWorkid);
     }
