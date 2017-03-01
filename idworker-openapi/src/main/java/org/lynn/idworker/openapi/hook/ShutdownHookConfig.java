@@ -32,7 +32,8 @@ public class ShutdownHookConfig {
     static {
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
-            ip = ip.replace(".","|");
+            logger.info(">>> current localhost ip is {} <<<", ip);
+            ip = ip.replace(".", "|");
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
