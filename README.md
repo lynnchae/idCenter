@@ -1,8 +1,11 @@
-#idCenter
+# idWorker
 ***
-####Generate Unique Id
+### Generate Unique Id
+
+  参考twitter`SnowFlake 生成唯一id`
+
 ******
-######A Pure Dubbo Project without HTTP 
+### A Pure Dubbo Project without HTTP 
 
 `1` Package with jar.
 
