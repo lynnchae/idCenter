@@ -2,7 +2,7 @@
 ***
 ### Generate Unique Id
 
-  参考twitter`SnowFlake 生成唯一id`
+  参考twitter`SnowFlake` 生成唯一id
 
 ******
 ### A Pure Dubbo Project without HTTP 
